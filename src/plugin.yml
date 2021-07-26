@@ -1,0 +1,6 @@
+main: be.maxouuuuu.spigotmc.EasyLag
+author: MasqueOu
+version: 3.0
+name: EasyLag
+commands:
+  lag:
