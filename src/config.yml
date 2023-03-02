@@ -1,0 +1,19 @@
+main:
+    prefix: "&6[&c&lEasyLag&r&6]"
+    use_24_hour_format: "true" # true = 24h format, false = 12 AM/PM format
+    server_name: "Unknown Server"
+message:
+    success_reloading_config: "&eThe configuration has been reloaded."
+    not_permission: "&cYou don't have permission to perform this command."
+    sender_is_not_player: "&cSorry! You must be a player to run this command."
+format:
+    header: "&7&m---|--------------&r&7>&r&c&l MySuperServer &r&7<&m-------------|---"
+    first_line: "&bServer:&c $server_name$ &7|&e $date$ at $time$"
+    second_line: "&7The MS indicates the response time with the server"
+    third_line: "&6Latency with the server&a $ms$ MS &6!"
+    fourth_line: "&7TPS indicates if the server is overloaded, &a20&7 = perfect"
+    fifth_line: "&6TPS is&a $tps$"
+    footer: "&7&m---|--------------&r&7>&r&c&l MySuperServer &r&7<&m-------------|---"
+    tps: "&6from last 1m, 5m, 15m:" # Can be three values or four values depending on the server software used.
+permission:
+    reload_plugin: "easylag.command.reload"
