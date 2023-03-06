@@ -18,7 +18,7 @@ import be.masqueou.spigotmc.utils.reflection.Reflection;
 
 public class LagCommand implements CommandExecutor {
 
-	private EasyLag easyLag;
+	private final EasyLag easyLag;
 	
 	public LagCommand(EasyLag easyLag) {
 		this.easyLag = easyLag;
@@ -61,8 +61,8 @@ public class LagCommand implements CommandExecutor {
 	}
 
 	private String getTimeValue() {
-		String result = "Error occured. Check the configuration file or contact me.";
-		boolean selector = Boolean.valueOf(easyLag.getMessage("main.use_24_hour_format"));
+		String result;
+		boolean selector = Boolean.parseBoolean(easyLag.getMessage("main.use_24_hour_format"));
 
 		String now = new SimpleDateFormat("hh:mm aa").format(new Date().getTime());
 		SimpleDateFormat inFormat = new SimpleDateFormat("hh:mm aa");
@@ -75,7 +75,7 @@ public class LagCommand implements CommandExecutor {
 				throw new RuntimeException(e);
 			}
 		} else {
-			result = inFormat.format(new Date()).toString();
+			result = inFormat.format(new Date());
 		}
 
 		return result;
@@ -95,7 +95,7 @@ public class LagCommand implements CommandExecutor {
 
 	private String format(double tps) {
 		return (tps > 18.0D ? ChatColor.GREEN
-				: tps > 17.0D ? ChatColor.YELLOW : tps > 15 ? ChatColor.RED : ChatColor.DARK_RED).toString()
+				: tps > 17.0D ? ChatColor.YELLOW : tps > 15 ? ChatColor.RED : ChatColor.DARK_RED)
 				+ (tps > 20.0D ? "*" : "") + Math.min(Math.round(tps * 100.0D) / 100.0D, 20.0D);
 	}
 
