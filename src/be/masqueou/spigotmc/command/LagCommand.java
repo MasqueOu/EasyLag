@@ -108,21 +108,21 @@ public class LagCommand implements CommandExecutor {
 			: null;
 
 	private static double[] getNMSRecentTps() {
-		if (getServerMethod == null || recentTpsField == null);
+		double[] result = new double[] {-1.0D, -1.0D, -1.0D};
+		if (getServerMethod == null || recentTpsField == null) return result;
 		Object server = Reflection.callMethod(getServerMethod, null);
-		double[] recent = Reflection.getField(recentTpsField, server);
-		return recent;
+		result = Reflection.getField(recentTpsField, server);
+		return result;
 	}
 
-	public int getPlayerPing(Player p) {
+	public int getPlayerPing(Player player) {
 		try {
 			String bukkitversion = Bukkit.getServer().getClass().getPackage().getName().substring(23);
 			Class<?> craftPlayer = Class.forName("org.bukkit.craftbukkit." + bukkitversion + ".entity.CraftPlayer");
-			Object handle = craftPlayer.getMethod("getHandle").invoke(p);
-			Integer ping = (Integer) handle.getClass().getDeclaredField("ping").get(handle);
-			return ping.intValue();
+			Object handle = craftPlayer.getMethod("getHandle").invoke(player);
+			return (Integer) handle.getClass().getDeclaredField("ping").get(handle);
 		} catch (Exception e) {
-			return 0;
+			return player.getPing();
 		}
 	}
 

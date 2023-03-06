@@ -27,11 +27,9 @@ public class Reflection {
 		return packageName.substring(packageName.lastIndexOf('.') + 1);
 	}
 
-
-
-	public static Method makeMethod(Class<?> clazz, String methodName, Class<?>... paramaters) {
+	public static Method makeMethod(Class<?> clazz, String methodName, Class<?>... parameters) {
 		try {
-			return clazz.getDeclaredMethod(methodName, paramaters);
+			return clazz.getDeclaredMethod(methodName, parameters);
 		} catch (NoSuchMethodException ex) {
 			return null;
 		} catch (Exception ex) {
@@ -40,12 +38,12 @@ public class Reflection {
 	}
 
 	@SuppressWarnings("unchecked")
-	public static <T> T callMethod(Method method, Object instance, Object... paramaters) {
+	public static <T> T callMethod(Method method, Object instance, Object... parameters) {
 		if (method == null)
 			throw new RuntimeException("No such method");
 		method.setAccessible(true);
 		try {
-			return (T) method.invoke(instance, paramaters);
+			return (T) method.invoke(instance, parameters);
 		} catch (InvocationTargetException ex) {
 			throw new RuntimeException(ex.getCause());
 		} catch (Exception ex) {
@@ -65,7 +63,6 @@ public class Reflection {
 	}
 
 	@SuppressWarnings("unchecked")
-
 	public static <T> T getField(Field field, Object instance) {
 		if (field == null)
 			throw new RuntimeException("No such field");
